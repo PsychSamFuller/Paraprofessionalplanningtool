@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paraprofessional Support Matrix</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f3; --surface:#ffffff; --surface2:#f5f8f9; --ink:#1d2a33; --muted:#566570;
+  --rule:#d3dde1; --accent:#1f5f6b; --accent-ink:#ffffff; --focus:#2b7a8a;
+  --low:#3c7a52; --low-bg:#e2f0e6; --med:#9a6a12; --med-bg:#f8edd5; --high:#a3324a; --high-bg:#f7e1e6;
+  --none-bg:#e6ebed;
+  --h0:#ffffff; --h1:#e3eef1; --h2:#b9d3da; --h3:#6f9eab; --h3-ink:#ffffff;
+  --warn:#8a4b00; --warn-bg:#fff3df;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a1f; --surface:#1a252c; --surface2:#1f2c34; --ink:#e4ecef; --muted:#9db0b9;
+    --rule:#2f414b; --accent:#5fb3c2; --accent-ink:#0d1a1f; --focus:#7fcbd8;
+    --low:#7fc79a; --low-bg:#1e3a29; --med:#e3b55c; --med-bg:#3d3016; --high:#ef8aa0; --high-bg:#45202a;
+    --none-bg:#26343c;
+    --h0:#1a252c; --h1:#20343c; --h2:#2c5260; --h3:#4b8a9a; --h3-ink:#ffffff;
+    --warn:#f0b866; --warn-bg:#3a2a12;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a1f; --surface:#1a252c; --surface2:#1f2c34; --ink:#e4ecef; --muted:#9db0b9;
+  --rule:#2f414b; --accent:#5fb3c2; --accent-ink:#0d1a1f; --focus:#7fcbd8;
+  --low:#7fc79a; --low-bg:#1e3a29; --med:#e3b55c; --med-bg:#3d3016; --high:#ef8aa0; --high-bg:#45202a;
+  --none-bg:#26343c;
+  --h0:#1a252c; --h1:#20343c; --h2:#2c5260; --h3:#4b8a9a; --h3-ink:#ffffff;
+  --warn:#f0b866; --warn-bg:#3a2a12;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding:18px 20px 40px}
+/* header */
+.hero{--hero:#133b45;background-color:var(--hero);color:#f1f6f7;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:28px 28px;position:relative;overflow:hidden}
+.hero-in{max-width:1040px;margin:0 auto;padding:30px 20px 8px}
+.brand{display:flex;align-items:center;gap:10px;font-size:.95rem;color:#b9d6dc}
+.brand .logo{width:28px;height:28px}
+.hero h1{font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.05;letter-spacing:-.02em;margin:14px 0 10px;font-weight:700;max-width:16ch}
+.hero .lede{color:#cfe1e5;font-size:1.08rem;max-width:58ch;margin:0}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0;margin:22px 0 0;max-width:820px}
+.steps li{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 12px;font-size:.9rem;color:#cfe1e5}
+.steps b{display:block;color:#fff;font-size:1rem}
+.stepn{flex:none;width:26px;height:26px;border-radius:50%;background:#f1f6f7;color:#133b45;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.band-wrap{max-width:1040px;margin:0 auto;padding:18px 20px 0}
+.dayband{display:block;width:100%;height:auto;max-height:110px}
+.dayband .dl text{fill:rgba(255,255,255,.62);font-size:12px;font-family:"Atkinson Hyperlegible",system-ui,sans-serif}
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--rule);box-shadow:0 1px 0 var(--rule)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--surface)}
+.tabs{max-width:1040px;margin:0 auto;padding:0 12px;display:flex;align-items:stretch;gap:2px;overflow-x:auto}
+.tab{white-space:nowrap;background:none;border:0;padding:14px 14px 12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab.ex{font-weight:400}
+.tab.ex[aria-selected="true"]{font-weight:700}
+.tabsep{width:1px;background:var(--rule);margin:12px 8px}
+.privacy{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;color:var(--muted);margin:4px 0 0}
+.privacy svg{flex:none;margin-top:3px}
+.foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--rule);color:var(--muted);font-size:.88rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero{--hero:#0e2a31}}
+:root[data-theme="dark"] .hero{--hero:#0e2a31}
+@media (max-width:700px){.steps{grid-template-columns:1fr}.hero-in{padding-top:22px}.dayband .dl{display:none}}
+h2{font-size:1.3rem;margin:0 0 4px}
+h3{font-size:1.1rem;margin:0 0 10px}
+p{margin:0 0 10px}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+
+.sec{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:22px 22px 24px;margin-top:20px;box-shadow:0 1px 2px rgba(19,59,69,.05)}
+.sec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sec-num{font-size:.85rem;font-weight:700;color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:1px 10px;white-space:nowrap}
+.hint{color:var(--muted);font-size:.95rem;max-width:72ch}
+
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 16px;margin-top:10px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.9rem;font-weight:700}
+label.f span.sub{font-weight:400;color:var(--muted)}
+input[type=text],input[type=date],input[type=number],select.big,textarea{background:var(--surface2);border:1px solid var(--rule);border-radius:6px;padding:8px 10px;width:100%}
+textarea{min-height:64px;resize:vertical}
+
+.scroll{overflow-x:auto;margin-top:12px;border:1px solid var(--rule);border-radius:8px}
+table{border-collapse:collapse;width:100%}
+.grid th,.grid td{border-bottom:1px solid var(--rule);padding:8px;vertical-align:top;text-align:left}
+.grid thead th{background:var(--surface2);font-size:.88rem;position:sticky;top:0}
+.grid thead th.set{text-align:center;min-width:96px}
+.grid td.c{text-align:center;vertical-align:middle}
+.grid th.skill{min-width:230px;max-width:320px;background:var(--surface);position:sticky;left:0;z-index:1}
+.grid thead th.skill{z-index:2;background:var(--surface2)}
+.skill-name{font-weight:700}
+.fill{display:block;margin:4px auto 0;font-size:.75rem;font-weight:400;background:none;border:1px solid var(--rule);border-radius:4px;padding:1px 6px;color:var(--muted);cursor:pointer}
+.fill:hover{color:var(--accent);border-color:var(--accent)}
+
+select.r{appearance:none;-webkit-appearance:none;width:56px;height:38px;text-align:center;text-align-last:center;border:1.5px solid var(--rule);border-radius:6px;background:var(--surface);font-weight:700;cursor:pointer;font-size:1rem}
+select.r[data-v="0"]{background:var(--h1)}
+select.r[data-v="1"]{background:var(--low-bg);border-color:var(--low)}
+select.r[data-v="2"]{background:var(--med-bg);border-color:var(--med)}
+select.r[data-v="3"]{background:var(--high-bg);border-color:var(--high)}
+
+details.guide{margin-top:4px;font-size:.88rem}
+details.guide summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:4px 10px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-weight:700;font-size:.85rem;background:var(--surface);list-style:none}
+details.guide summary::-webkit-details-marker{display:none}
+details.guide summary::before{content:"\25B8";font-size:.8rem}
+details.guide[open] summary::before{content:"\25BE"}
+details.guide summary:hover{background:var(--accent);color:var(--accent-ink)}
+details.guide[open]{background:var(--surface2);border:1px solid var(--rule);border-radius:8px;padding:6px 10px 10px}
+.g{display:grid;grid-template-columns:28px 1fr;gap:6px 8px;margin-top:8px;color:var(--ink);font-size:.9rem}
+.g b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;font-weight:700;border:1.5px solid var(--rule)}
+.g b:nth-of-type(1){background:var(--h1)}
+.g b:nth-of-type(2){background:var(--low-bg);border-color:var(--low)}
+.g b:nth-of-type(3){background:var(--med-bg);border-color:var(--med)}
+.g b:nth-of-type(4){background:var(--high-bg);border-color:var(--high)}
+.scale{margin:12px 0 4px;border:1px solid var(--rule);border-radius:8px;padding:12px 14px;background:var(--surface2)}
+.scale p{margin:0 0 10px;max-width:72ch}
+.scale-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sc{border-radius:6px;padding:8px 10px;border:1.5px solid var(--rule);font-size:.88rem}
+.sc b{display:block;font-size:1.15rem}
+.sc.s0{background:var(--h1)}
+.sc.s1{background:var(--low-bg);border-color:var(--low)}
+.sc.s2{background:var(--med-bg);border-color:var(--med)}
+.sc.s3{background:var(--high-bg);border-color:var(--high)}
+.scale-arrow{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-top:6px}
+@media (max-width:600px){.scale-row{grid-template-columns:repeat(2,1fr)}}
+textarea.ev{display:none;margin-top:8px;font-size:.88rem;min-height:56px;border-color:var(--med)}
+textarea.ev.show{display:block}
+.cls-name{min-width:180px}
+.set-name{width:100%;min-width:90px;text-align:center;font-weight:700;font-size:.88rem;padding:4px 6px;background:var(--surface);border:1px solid var(--rule);border-radius:5px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{border:0;border-radius:8px;padding:12px 20px;font-weight:700;cursor:pointer;background:var(--accent);color:var(--accent-ink)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:none;color:var(--accent);border:1.5px solid var(--accent)}
+.btn.small{padding:6px 12px;font-size:.9rem}
+.err{color:var(--high);font-weight:700;margin-top:10px}
+
+/* report */
+.report{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:32px 28px 26px;margin-top:18px;position:relative;overflow:hidden}
+.report::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--h3) 0 25%,var(--low) 25% 50%,var(--med) 50% 75%,var(--high) 75%)}
+.r-head{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.r-kind{color:var(--accent);font-weight:700;margin:0}
+.meta{display:grid;grid-template-columns:auto auto;gap:2px 12px;margin:0;font-size:.95rem}
+.meta dt{color:var(--muted)} .meta dd{margin:0;font-weight:700}
+.r-sec{margin-top:24px}
+.overall{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}
+.stat{flex:1 1 220px;border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.stat .big{font-size:2rem;font-weight:700;line-height:1.1}
+.stat .lbl{color:var(--muted);font-size:.9rem}
+.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.85rem;font-weight:700}
+.badge.low{background:var(--low-bg);color:var(--low)}
+.badge.medium{background:var(--med-bg);color:var(--med)}
+.badge.high{background:var(--high-bg);color:var(--high)}
+.badge.none{background:var(--none-bg);color:var(--muted)}
+
+.ribbon{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--rule);margin:8px 0 4px}
+.rib{flex:1;padding:12px 8px;min-width:0;text-align:center;border-right:2px solid var(--surface)}
+.rib:last-child{border-right:0}
+.rib .n{font-weight:700;font-size:.92rem;overflow-wrap:anywhere}
+.rib .l{font-size:.8rem}
+.rib.low{background:var(--low-bg);color:var(--low)}
+.rib.medium{background:var(--med-bg);color:var(--med)}
+.rib.high{background:var(--high-bg);color:var(--high)}
+.rib.none{background:var(--none-bg);color:var(--muted)}
+.ribcap{font-size:.85rem;color:var(--muted);margin-bottom:14px}
+
+.bars{display:grid;grid-template-columns:minmax(120px,190px) 1fr auto;gap:6px 12px;align-items:center}
+.bars .nm{font-size:.95rem}
+.track{height:16px;background:var(--none-bg);border-radius:4px;overflow:hidden}
+.track i{display:block;height:100%}
+.track i.low{background:var(--low)} .track i.medium{background:var(--med)} .track i.high{background:var(--high)}
+.bars .v{font-size:.88rem;white-space:nowrap;text-align:right}
+
+.callouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px}
+.co{border-left:5px solid;padding:8px 12px;background:var(--surface2);border-radius:0 6px 6px 0}
+.co.high{border-color:var(--high)} .co.medium{border-color:var(--med)} .co.low{border-color:var(--low)}
+.co h4{margin:0 0 4px;font-size:.95rem}
+.co p{margin:0;font-size:.92rem}
+
+.heat th,.heat td{border:1px solid var(--rule);padding:6px 8px;font-size:.9rem}
+.heat thead th{background:var(--surface2);text-align:center}
+.heat td{text-align:center;font-weight:700;min-width:64px}
+.heat td.h0{background:var(--h0)} .heat td.h1{background:var(--h1)} .heat td.h2{background:var(--h2)} .heat td.h3{background:var(--h3);color:var(--h3-ink)}
+.heat td.na{color:var(--muted);font-weight:400}
+.plain th,.plain td{border-bottom:1px solid var(--rule);padding:8px;text-align:left;vertical-align:top;font-size:.93rem}
+.plain thead th{color:var(--muted);font-weight:700;font-size:.85rem}
+.notes{margin:0;padding-left:18px}
+.notes li{margin-bottom:8px}
+.warnbox{background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:10px 14px;margin-top:10px;font-size:.93rem}
+.fine{font-size:.85rem;color:var(--muted);margin-top:24px;border-top:1px solid var(--rule);padding-top:12px}
+.method{font-size:.88rem;color:var(--muted);margin-top:8px}
+.codebox{margin-top:18px}
+.codebox textarea{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;min-height:80px}
+.print-only{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--rule);border-radius:999px;padding:5px 12px;font-size:.88rem;cursor:pointer;background:var(--surface);user-select:none}
+.chip:has(input:checked){border-color:var(--accent);background:var(--h1);font-weight:700}
+.chip input{accent-color:var(--accent);margin:0}
+.evb{display:none;margin-top:8px;padding:8px 10px;border:1px dashed var(--med);border-radius:6px;background:var(--med-bg);font-weight:400}
+.evb.show{display:block}
+.evh{font-size:.82rem;font-weight:700;color:var(--med);margin-bottom:2px}
+.evb label{display:flex;gap:6px;align-items:center;font-size:.85rem;margin-top:3px;cursor:pointer}
+.evb input{accent-color:var(--accent);margin:0}
+.writein{display:none;margin-top:14px;font-size:.95rem}
+.writein span{margin-right:28px;display:inline-block;margin-bottom:6px}
+.pdfmode .print-only{display:block}
+.pdfmode .writein{display:block}
+@media print{.writein{display:block}}
+.pdfmode .codeprint{display:none}
+.pdfmode .report{border:0;border-radius:0}
+.codetext{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:8px;line-height:1.35;word-break:break-all;overflow-wrap:anywhere;border:1px solid var(--rule);padding:8px;border-radius:4px}
+.savenote{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px;padding:14px 16px;border-radius:10px;background:var(--warn-bg);color:var(--warn);border:1px solid var(--med)}
+.savenote.ok{background:var(--low-bg);color:var(--low);border-color:var(--low)}
+.savenote p{margin:0;flex:1 1 300px;font-weight:700}
+.checks{margin:0;padding-left:18px}
+.checks li{margin-bottom:6px}
+.exnote{margin-top:18px;border-left:5px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0;padding:14px 18px;border-top:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.exnote h2{margin-bottom:6px}
+.exnote ul{margin:8px 0 0;padding-left:20px}
+.exnote li{margin-bottom:4px}
+fieldset.example{border:0;margin:0;padding:0;min-width:0}
+fieldset.example .btnrow, fieldset.example .fill, fieldset.example .err{display:none}
+fieldset.example select.r{opacity:1;color:var(--ink)}
+.ex-h{margin:34px 0 0;padding-top:18px;border-top:3px dashed var(--rule);font-size:1.4rem}
+.lines div{border-bottom:1px solid #999;height:30px}
+.teamcode{display:flex;gap:8px;align-items:flex-start;margin-top:10px}
+.teamcode textarea{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;min-height:56px}
+.radios{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}
+.radios label{display:flex;gap:6px;align-items:center}
+
+@media (max-width:600px){
+  .wrap{padding:16px 12px 48px}
+  .report{padding:16px}
+  .bars{grid-template-columns:1fr auto}
+  .bars .track{grid-column:1 / -1;order:3}
+  .ribbon{flex-wrap:wrap}
+  .rib{flex:1 1 33%}
+  .grid th.skill{min-width:170px}
+}
+@media print{
+  :root{--bg:#fff;--surface:#fff;--surface2:#f4f4f4;--ink:#000;--muted:#444;--rule:#bbb;color-scheme:light;padding:0}
+  body{background:#fff;font-size:12px}
+  .no-print,.tabs,header.site{display:none !important}
+  .wrap{padding:0;max-width:none}
+  .report{border:0;padding:0;margin:0}
+  .print-only{display:block}
+  .r-sec{break-inside:avoid}
+  .scroll{overflow:visible;border:0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<header class="site no-print">
+  <div class="hero">
+    <div class="hero-in">
+      <div class="brand"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="2" y="18" width="6" height="12" rx="2" fill="#7fc79a"/><rect x="10" y="10" width="6" height="20" rx="2" fill="#e3b55c"/><rect x="18" y="4" width="6" height="26" rx="2" fill="#ef8aa0"/><rect x="26" y="14" width="4" height="16" rx="2" fill="#6f9eab"/></svg><span>Student support planning</span></div>
+      <h1>Paraprofessional Support Matrix</h1>
+      <p class="lede">A shared way for IEP teams to look at when and where a student needs adult support, based on what each person actually sees during the day.</p>
+      <ol class="steps">
+        <li><span class="stepn">1</span><div><b>Rate</b>Each person rates the parts of the day they observe.</div></li>
+        <li><span class="stepn">2</span><div><b>Print</b>Bring your report and rater code to the meeting.</div></li>
+        <li><span class="stepn">3</span><div><b>Combine</b>The case manager merges everyone’s ratings.</div></li>
+      </ol>
+    </div>
+    <div class="band-wrap"><svg class="dayband" viewBox="0 0 1000 90" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false"><g><rect x="0" y="50" width="16" height="14" rx="3" fill="#6f9eab"/><rect x="24" y="50" width="16" height="14" rx="3" fill="#6f9eab"/><rect x="48" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="72" y="50" width="16" height="14" rx="3" fill="#6f9eab"/><rect x="96" y="50" width="16" height="14" rx="3" fill="#6f9eab"/><rect x="120" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="166" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="190" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="214" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="238" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="262" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="286" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="310" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="334" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="358" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="382" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="428" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="452" y="4" width="16" height="60" rx="3" fill="#ef8aa0"/><rect x="476" y="4" width="16" height="60" rx="3" fill="#ef8aa0"/><rect x="500" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="524" y="4" width="16" height="60" rx="3" fill="#ef8aa0"/><rect x="548" y="4" width="16" height="60" rx="3" fill="#ef8aa0"/><rect x="572" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="596" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="642" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="666" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="690" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="714" y="4" width="16" height="60" rx="3" fill="#ef8aa0"/><rect x="738" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="762" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="786" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="810" y="22" width="16" height="42" rx="3" fill="#e3b55c"/><rect x="856" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="880" y="50" width="16" height="14" rx="3" fill="#6f9eab"/><rect x="904" y="50" width="16" height="14" rx="3" fill="#6f9eab"/><rect x="928" y="38" width="16" height="26" rx="3" fill="#7fc79a"/><rect x="952" y="50" width="16" height="14" rx="3" fill="#6f9eab"/><rect x="976" y="50" width="16" height="14" rx="3" fill="#6f9eab"/></g><line x1="0" y1="65" x2="1000" y2="65" stroke="rgba(255,255,255,.35)" stroke-width="1"/><g class="dl"><text x="68.0" y="84" text-anchor="middle">Arrival</text><text x="282.0" y="84" text-anchor="middle">Classroom</text><text x="520.0" y="84" text-anchor="middle">Lunch/Recess</text><text x="734.0" y="84" text-anchor="middle">Transitions</text><text x="924.0" y="84" text-anchor="middle">Departure</text></g></svg></div>
+  </div>
+  <nav class="tabbar">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-rater" aria-selected="true">My ratings</button>
+      <button class="tab" role="tab" id="tab-team" aria-selected="false">Team summary</button>
+      <span class="tabsep" aria-hidden="true"></span>
+      <button class="tab ex" role="tab" id="tab-exrater" aria-selected="false">Example: ratings</button>
+      <button class="tab ex" role="tab" id="tab-exteam" aria-selected="false">Example: team summary</button>
+    </div>
+  </nav>
+</header>
+<div class="wrap">
+  <p class="privacy no-print"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 1 2.5 3.2v4.1c0 3.4 2.3 6.4 5.5 7.3 3.2-.9 5.5-3.9 5.5-7.3V3.2Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Nothing you enter leaves this browser tab, and it clears when you close the tab. This works like a calculator. It never asks for names or any student information, and nothing you enter leaves this browser tab.</p>
+  <main id="app"></main>
+  <footer class="foot no-print">A planning guide for IEP teams. Final decisions about paraprofessional support rest with the team.</footer>
+</div>
+
+<script>
+const S1 = [
+ ["Finds Place",["Student locates where he/she is supposed to be in the school, classroom and in nonacademic settings.","Student needs cues and/or assistance 10–25% of the time to find his/her place in the classroom and in nonacademic settings.","Student needs cues and/or assistance 26–50% of the time to find his/her place in the classroom and in nonacademic settings.","Student cannot locate where he/she is supposed to be without consistent verbal or physical prompts by staff."]],
+ ["Maintains Place",["Student is where he/she is supposed to be and doesn’t leave without permission.","Student leaves the place where he/she is expected to be in the classroom without permission, but does not leave the room.","Student is not where he/she is expected to be 10–35% of the time, OR occasionally exits or attempts to exit the room without permission.","Student is not where he/she is expected to be 36+% of the time, OR frequently exits or attempts to exit the room without permission."]],
+ ["Manages School-Related Belongings",["Student brings school-related belongings to class and keeps them in their proper place.","Student needs 2–5 reminders per day to bring school-related belongings to class and/or keep them in their proper place.","Student needs 5–10 reminders to bring school-related belongings to class and/or keep them in their proper place.","Student needs 11+ reminders to bring school-related belongings to class and/or keep them in their proper place."]],
+ ["Uses Materials Appropriately",["Student uses writing tools, books, and other school materials in an appropriate manner.","Student needs 2–5 reminders to use writing tools, books, and other school materials in an appropriate manner.","Student needs 5–10 reminders to use writing tools, books, and other school materials in an appropriate manner.","Student cannot use writing tools, books, and other school materials in an appropriate manner without continuous redirection."]],
+ ["Attends to Instruction",["Student pays attention and is on-task during structured and nonstructured class time.","Student is occasionally off-task, 10–25% of the time, during structured and unstructured time.","Student is off-task 26–50% of the time during structured or nonstructured time; needs frequent reminders to return to task.","Student is off-task 51+% of the time and needs consistent reminders to return to task."]],
+ ["Responds to Instruction",["Student understands instruction and follows verbal and written directions without refusals.","Student gives some incorrect responses, verbal and written, indicating he/she does not understand instructions, or occasionally refuses to respond to instruction.","Student refuses to or seldom gives correct responses, verbally or written, indicating he/she seldom understands instructions.","Student does not understand verbal directions or provide correct responses either verbally or in writing, or consistently refuses to complete work."]],
+ ["Participates",["Student participates to the best of his/her ability in class activities.","Student participates to the best of his/her ability, needing some assistance to do so.","Student seldom participates to the best of his/her ability without a great deal of assistance.","Student does not participate to the best of his/her ability even with continuous assistance."]],
+ ["Completes Tasks",["Student completes tasks.","Student needs assistance completing tasks.","Student seldom completes tasks without frequent assistance.","Student does not complete tasks even with much assistance."]],
+ ["Terminates Tasks",["Student ends his/her task when it is completed.","Student needs reminders that a task is completed.","Student seldom ends a task without frequent reminders that it is over.","Student does not end a task independently even when reminded."]],
+ ["Follows Classroom Rules",["Student follows classroom rules.","Student needs 2–5 reminders about following classroom rules per class period.","Student needs 5–10 reminders about following classroom rules per class period.","Student needs 11+ reminders about following classroom rules per class period."]]
+];
+const S2 = [
+ ["Interpersonal Relationships",["Student interacts appropriately with peers and adults, and/or knows how to interact appropriately with peers and adults.","Student occasionally does or says things that offend or ‘turn off’ peers or adults, and/or occasionally does not know how to interact appropriately.","Student seldom interacts appropriately with peers or adults, or seldom knows how to; and is sometimes rejected by or isolated from others.","Student does not interact appropriately with peers and adults, or does not know how to; and is socially isolated."]],
+ ["Exhibits Dangerous Behaviors",["Student behaves in a way that is safe to self and others.","Student occasionally behaves in a way that could be dangerous to self and/or others.","Student often does not consider the safety of self or others, and/or frequently behaves in a manner that is dangerous to self and/or others.","Student does not consider the safety of self or others; behaves in a manner that is dangerous to self or others, and has a Behavior Plan."]],
+ ["Eating",["Student eats and drinks a typical meal without help or supervision.","Student needs verbal directions and/or occasional minimal assistance with eating and/or drinking.","Student may partially assist, but needs assistance with more than half of the activity.","Student is unable to provide assistance to complete eating activities."]],
+ ["Grooming",["Student does grooming activities (brushes teeth, combs hair, blows nose) without help or supervision.","Student needs verbal prompts and/or minor assistance to complete basic grooming tasks.","Student partially assists but needs significant assistance in completing basic grooming tasks.","Student is unable to meaningfully assist in completing basic grooming tasks."]],
+ ["Toileting",["Student independently manages clothes, cleans self, and uses equipment without supervision.","Student needs help with toileting tasks, such as unfastening clothing or cleaning self.","Student completes some tasks, but assistance is needed to do more than half of the toileting tasks.","Student needs full assistance to complete toileting or consistent supervision due to behavior."]],
+ ["Mobility",["Student is able to walk without help or supervision. Staff presence is not needed for safety in child-proof areas.","Student needs assistance during locomotion such as holding hand, support going up/down steps, or occasional assistance with wheelchair on uneven surfaces.","Student can participate in controlling or propelling wheelchair, or requires significant stabilization and weight support in order to walk.","Student is completely dependent on another for mobility, or needs consistent supervision due to behavior."]],
+ ["Transfer",["Student transfers from standing to sitting, and on and off toilet independently. Staff presence is not needed for safety during transfers.","Student occasionally needs assistance with transfers, and asks for help when needed.","Student requires assistance with most transfers. Occasions when assistance is needed are predictable.","Student is completely dependent on others when transferring from standing to sitting, or on and off the toilet."]]
+];
+const S3G = ["Student is able to participate in class with little or no extra adult support and little or no need for modifications, adaptations, or accommodations to the curriculum.","Student is able to participate in class with an adult check-in or occasional extra support from adults and needs occasional modifications, adaptations, or accommodations.","Student requires extra adult support on a daily basis and requires daily modifications, adaptations, or accommodations to the curriculum.","Student’s need for support can only be met outside of the mainstream, or with constant adult supervision."];
+/* Stable IDs. Codes store everything by these IDs, so labels can be reworded,
+   reordered, or extended later without breaking older codes. Never reuse or change an ID. */
+const S1_IDS = ["finds","maintains","belongings","materials","attends","responds","participates","completes","terminates","rules"];
+const S2_IDS = ["interpersonal","dangerous","eating","grooming","toileting","mobility","transfer"];
+const SETTING_OPTIONS = [["arrival","Arrival"],["homeroom","Homeroom/Advisory"],["classroom","Classroom"],["specials","Specials"],["lunch","Lunch"],["recess","Recess"],["lunchrecess","Lunch/Recess"],["transitions","Transitions"],["departure","Departure"]];
+const CLASS_OPTIONS = [["reading","Reading/Language Arts"],["math","Math"],["socialstudies","Social Studies"],["science","Science"],["writing","Writing"],["pe","Physical Education"],["music","Music"],["art","Art"],["library","Library/Media"],["steam","STEAM/Technology"],["health","Health"],["worldlang","World Language"],["cte","CTE/Electives"],["otherA","Other class A"],["otherB","Other class B"]];
+const DEFAULT_SETTING_IDS = ["arrival","classroom","lunchrecess","transitions","departure"];
+const DEFAULT_CLASS_IDS = ["reading","math","socialstudies","science","writing","pe","music","art","library"];
+const EVIDENCE = [["tally","Tally or frequency count"],["log","Behavior or incident log"],["work","Work samples"],["obs","Planned observation"],["progress","IEP progress data"],["estimate","Estimate from memory"]];
+const ROLES = ["Classroom/general ed teacher","Special education teacher","Specialist (PE, music, art, etc.)","Paraprofessional","Administrator","Related service provider","Other"];
+const LEVEL = {low:"Lower need",medium:"Moderate need",high:"Higher need"};
+const LABEL = Object.fromEntries([...SETTING_OPTIONS,...CLASS_OPTIONS]);
+const EVLABEL = Object.fromEntries(EVIDENCE);
+const S1N = Object.fromEntries(S1_IDS.map((id,i)=>[id,S1[i][0]]));
+const S2N = Object.fromEntries(S2_IDS.map((id,i)=>[id,S2[i][0]]));
+const ordered = (ids, opts) => opts.map(o=>o[0]).filter(id=>ids.includes(id));
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const todayStr = () => new Date().toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"});
+function blankState(){ return {v:3, role:"", settings:[...DEFAULT_SETTING_IDS], classes:[...DEFAULT_CLASS_IDS], s1:{}, s2:{}, s3:{}, ev:{}}; }
+const g1 = (st,sk,se) => { const v = st.s1[sk] ? st.s1[sk][se] : null; return v==null ? null : v; };
+const g2 = (st,sk) => st.s2[sk]==null ? null : st.s2[sk];
+const g3 = (st,c) => st.s3[c]==null ? null : st.s3[c];
+
+/* Storage: only ratings, checkboxes and the role are kept, and only for this tab.
+   The tool has no place to type names or other identifying information. */
+function load(k){ try{ const s = sessionStorage.getItem(k); return s ? JSON.parse(s) : null; }catch(e){ return null; } }
+function save(){ try{ sessionStorage.setItem("psm3-state", JSON.stringify(state)); sessionStorage.setItem("psm3-team", JSON.stringify({codes:team.codes,method:team.method,day:team.day,before:team.before,after:team.after,sped:team.sped})); }catch(e){} }
+try{ ["psm-state","psm-team"].forEach(k=>sessionStorage.removeItem(k)); }catch(e){}
+let state = load("psm3-state"); if(!state || state.v!==3) state = blankState();
+let team = load("psm3-team") || {codes:["",""],method:"median",day:420,before:0,after:0,sped:0};
+let tab = "rater", view = "form", teamHTML = "";
+const app = document.getElementById("app");
+
+/* ---------- math ---------- */
+function levelOf(p){ if(p==null) return null; const s=p*198; return s<75?"low":s<120?"medium":"high"; }
+const fmt = v => v==null ? "—" : (Number.isInteger(v) ? String(v) : v.toFixed(1));
+const pct = p => Math.round(p*100) + "%";
+function analyze(st){
+  const setIds = ordered(st.settings, SETTING_OPTIONS), clsIds = ordered(st.classes, CLASS_OPTIONS);
+  const settings = setIds.map(id=>{ let sum=0,n=0; S1_IDS.forEach(sk=>{ const v=g1(st,sk,id); if(v!=null){sum+=v;n++;} }); return {id,name:LABEL[id],sum,n,p:n?sum/(3*n):null}; });
+  const classes = clsIds.map(id=>{ const v=g3(st,id); return {id,name:LABEL[id],v,p:v==null?null:v/3}; });
+  let total=0, rated=0;
+  const add = v => { if(v!=null){ total+=v; rated++; } };
+  S1_IDS.forEach(sk=>setIds.forEach(se=>add(g1(st,sk,se))));
+  S2_IDS.forEach(sk=>add(g2(st,sk)));
+  clsIds.forEach(c=>add(g3(st,c)));
+  const possible = S1_IDS.length*setIds.length + S2_IDS.length + clsIds.length;
+  return {setIds,clsIds,settings,classes,total,rated,possible,p:rated?total/(3*rated):null,orig:possible?total/(3*possible):0};
+}
+const median = a => { const s=[...a].sort((x,y)=>x-y), m=Math.floor(s.length/2); return s.length%2 ? s[m] : (s[m-1]+s[m])/2; };
+const mean = a => a.reduce((x,y)=>x+y,0)/a.length;
+
+/* Items rated 2 or 3, used for the evidence check. Works on combined (fractional) values too. */
+function itemsHigh(st){
+  const setIds = ordered(st.settings, SETTING_OPTIONS), clsIds = ordered(st.classes, CLASS_OPTIONS), out = [];
+  S1_IDS.forEach(sk=>{ const hi = setIds.filter(se=>{ const v=g1(st,sk,se); return v!=null && v>=2; });
+    if(hi.length) out.push({key:"s1:"+sk, label:S1N[sk], detail:hi.map(se=>`${LABEL[se]} ${fmt(g1(st,sk,se))}`).join(", ")}); });
+  S2_IDS.forEach(sk=>{ const v=g2(st,sk); if(v!=null && v>=2) out.push({key:"s2:"+sk, label:S2N[sk], detail:`Rated ${fmt(v)}`}); });
+  const hc = clsIds.filter(c=>{ const v=g3(st,c); return v!=null && v>=2; });
+  if(hc.length) out.push({key:"s3", label:"Classes (Section 3)", detail:hc.map(c=>`${LABEL[c]} ${fmt(g3(st,c))}`).join(", ")});
+  return out;
+}
+const weakness = evs => (!evs || !evs.length) ? "none" : evs.every(e=>e==="estimate") ? "estimate" : null;
+function isHighKey(st,key){ return itemsHigh(st).some(it=>it.key===key); }
+
+/* ---------- codes ---------- */
+const CODE_FORMAT = 3;
+function checksum(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return h.toString(36).padStart(7,"0"); }
+function encode(st){
+  const setIds = ordered(st.settings, SETTING_OPTIONS), clsIds = ordered(st.classes, CLASS_OPTIONS);
+  const s1={}, s2={}, s3={}, ev={};
+  S1_IDS.forEach(sk=>setIds.forEach(se=>{ const v=g1(st,sk,se); if(v!=null){ (s1[sk]=s1[sk]||{})[se]=v; } }));
+  S2_IDS.forEach(sk=>{ const v=g2(st,sk); if(v!=null) s2[sk]=v; });
+  clsIds.forEach(c=>{ const v=g3(st,c); if(v!=null) s3[c]=v; });
+  Object.entries(st.ev||{}).forEach(([k,a])=>{ if(a && a.length) ev[k]=a; });
+  const payload = {fmt:CODE_FORMAT, role:st.role||"", settings:setIds, classes:clsIds, s1, s2, s3, ev};
+  const b=new TextEncoder().encode(JSON.stringify(payload)); let bin=""; b.forEach(x=>bin+=String.fromCharCode(x));
+  const b64 = btoa(bin);
+  return "PSM3."+b64+"."+checksum(b64);
+}
+const CODE_ERR = {
+  empty:"This box is empty.",
+  notcode:"This isn’t a rater code. Rater codes start with PSM and are found at the bottom of each rater’s report or on the last page of their PDF.",
+  start:"This code is missing its beginning. Copy it again starting from the letters PSM.",
+  broken:"This code is incomplete or was changed while it was copied. Ask the rater to copy the whole code again, or copy it from the last page of their PDF.",
+  newer:"This code was made with a newer version of the tool. Open the latest version of the tool to combine it.",
+  older:"This code is from an earlier version of the tool that is no longer supported. Ask the rater to fill out the form again."
+};
+const okVal = v => (v===0||v===1||v===2||v===3) ? v : null;
+function decode(code){
+  const all = String(code||"").replace(/\s+/g,"");
+  if(!all) throw new Error(CODE_ERR.empty);
+  const found = all.match(/PSM\d+\.[A-Za-z0-9+/=]+(?:\.[a-z0-9]{7})?/g);
+  const c = found ? found.sort((a,b)=>b.length-a.length)[0] : all;
+  const m = c.match(/^PSM(\d+)\./);
+  if(!m){ throw new Error(c.includes("PSM") || /^[A-Za-z0-9+/=.]{40,}$/.test(c) ? CODE_ERR.start : CODE_ERR.notcode); }
+  const ver = +m[1];
+  if(ver>CODE_FORMAT) throw new Error(CODE_ERR.newer);
+  if(ver<CODE_FORMAT) throw new Error(CODE_ERR.older);
+  const rest = c.slice(m[0].length), dot = rest.lastIndexOf(".");
+  if(dot<1) throw new Error(CODE_ERR.broken);
+  const b64 = rest.slice(0,dot);
+  if(checksum(b64)!==rest.slice(dot+1)) throw new Error(CODE_ERR.broken);
+  let raw;
+  try{ const bin=atob(b64); raw = JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, ch=>ch.charCodeAt(0)))); }
+  catch(e){ throw new Error(CODE_ERR.broken); }
+  if(!raw || raw.fmt!==CODE_FORMAT || !Array.isArray(raw.settings) || !Array.isArray(raw.classes)) throw new Error(CODE_ERR.broken);
+  return sanitize(raw);
+}
+/* Keeps only known IDs and valid values, so nothing unexpected can ride along in a code. */
+function sanitize(raw){
+  const dropped = new Set();
+  const knownSet = SETTING_OPTIONS.map(o=>o[0]), knownCls = CLASS_OPTIONS.map(o=>o[0]), knownEv = EVIDENCE.map(o=>o[0]);
+  const st = blankState();
+  st.role = ROLES.includes(raw.role) ? raw.role : "";
+  raw.settings.forEach(id=>{ if(!knownSet.includes(id)) dropped.add(String(id)); });
+  raw.classes.forEach(id=>{ if(!knownCls.includes(id)) dropped.add(String(id)); });
+  st.settings = raw.settings.filter(id=>knownSet.includes(id));
+  st.classes = raw.classes.filter(id=>knownCls.includes(id));
+  Object.entries(raw.s1||{}).forEach(([sk,row])=>{
+    if(!S1_IDS.includes(sk)){ dropped.add(sk); return; }
+    Object.entries(row||{}).forEach(([se,v])=>{ if(st.settings.includes(se) && okVal(v)!=null) (st.s1[sk]=st.s1[sk]||{})[se]=v; });
+  });
+  Object.entries(raw.s2||{}).forEach(([sk,v])=>{ if(!S2_IDS.includes(sk)){ dropped.add(sk); return; } if(okVal(v)!=null) st.s2[sk]=v; });
+  Object.entries(raw.s3||{}).forEach(([c,v])=>{ if(st.classes.includes(c) && okVal(v)!=null) st.s3[c]=v; });
+  Object.entries(raw.ev||{}).forEach(([k,a])=>{
+    const okKey = k==="s3" || (k.startsWith("s1:") && S1_IDS.includes(k.slice(3))) || (k.startsWith("s2:") && S2_IDS.includes(k.slice(3)));
+    if(okKey && Array.isArray(a)) st.ev[k] = a.filter(e=>knownEv.includes(e));
+  });
+  st._dropped = [...dropped];
+  return st;
+}
+
+/* ---------- form ---------- */
+function sel(key,label,v){
+  return `<select class="r" data-cell="${key}" data-v="${v??""}" aria-label="${esc(label)}"><option value="">—</option>${[0,1,2,3].map(n=>`<option value="${n}"${v===n?" selected":""}>${n}</option>`).join("")}</select>`;
+}
+function scale(lead){
+  return `<div class="scale"><p>${lead} <b>Higher numbers mean the student needs more adult support; lower numbers mean little or no support.</b></p><div class="scale-row"><div class="sc s0"><b>0</b>Independent, no extra support</div><div class="sc s1"><b>1</b>Minimal support, occasional reminders or help</div><div class="sc s2"><b>2</b>Moderate support, frequent help most days</div><div class="sc s3"><b>3</b>Intensive support, constant adult help</div></div><div class="scale-arrow"><span>Less support</span><span>More support</span></div></div>`;
+}
+function guide(arr, open){ return `<details class="guide"${open?" open":""}><summary>What 0–3 mean for this skill</summary><div class="g">${arr.map((t,i)=>`<b>${i}</b><span>${esc(t)}</span>`).join("")}</div></details>`; }
+function evBox(key){
+  const chosen = state.ev[key] || [];
+  return `<div class="evb${isHighKey(state,key)?" show":""}" data-evwrap="${key}"><div class="evh">What is the 2 or 3 based on?</div>${EVIDENCE.map(([id,l])=>`<label><input type="checkbox" data-ev="${key}" value="${id}"${chosen.includes(id)?" checked":""}> ${esc(l)}</label>`).join("")}</div>`;
+}
+function chips(opts, chosen, attr){
+  return `<div class="chips">${opts.map(([id,l])=>`<label class="chip"><input type="checkbox" ${attr}="${id}"${chosen.includes(id)?" checked":""}> ${esc(l)}</label>`).join("")}</div>`;
+}
+
+function renderForm(){
+  const setIds = ordered(state.settings, SETTING_OPTIONS), clsIds = ordered(state.classes, CLASS_OPTIONS);
+  const s1rows = S1.map(([name,g],i)=>{ const sk=S1_IDS[i];
+    return `<tr><th scope="row" class="skill"><div class="skill-name">${esc(name)}</div>${guide(g)}${evBox("s1:"+sk)}</th>${setIds.map(se=>`<td class="c">${sel(`s1|${sk}|${se}`,`${name}, ${LABEL[se]}`,g1(state,sk,se))}</td>`).join("")}</tr>`; }).join("");
+  const s2rows = S2.map(([name,g],i)=>{ const sk=S2_IDS[i];
+    return `<tr><th scope="row" class="skill"><div class="skill-name">${esc(name)}</div>${guide(g)}${evBox("s2:"+sk)}</th><td class="c">${sel(`s2|${sk}`,name,g2(state,sk))}</td></tr>`; }).join("");
+  const s3rows = clsIds.map(c=>`<tr><td>${esc(LABEL[c])}</td><td class="c">${sel(`s3|${c}`,LABEL[c],g3(state,c))}</td></tr>`).join("");
+  app.innerHTML = `
+  <section class="sec">
+    <h2>Paraprofessional Needs Report</h2>
+    <p class="hint">This works like a calculator. It never asks for names or student information. If you need the student’s name on your report, write it on the printout by hand.</p>
+    <div class="fields"><label class="f">Your role<select class="big" data-role="1"><option value="">Choose a role</option>${ROLES.map(r=>`<option${r===state.role?" selected":""}>${esc(r)}</option>`).join("")}</select></label></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">Section 1</span><h2>Executive functioning</h2></div>
+    ${scale("Rate each skill from 0 to 3 in every part of the day you’ve seen. Open the guide under each skill to see exactly what each number looks like for that skill.")}
+    <h3 style="margin-top:16px">Parts of the day to include</h3>
+    <p class="hint">Choose the parts of the day that match the student’s schedule. Within those, leave a cell on “—” if you haven’t observed the student there; it won’t count as a zero.</p>
+    ${chips(SETTING_OPTIONS, state.settings, "data-togset")}
+    ${setIds.length ? `<div class="scroll"><table class="grid"><thead><tr><th class="skill">Skill</th>${setIds.map(se=>`<th class="set">${esc(LABEL[se])}<button type="button" class="fill no-print" data-fill="${se}">Fill blanks with 0</button></th>`).join("")}</tr></thead><tbody>${s1rows}</tbody></table></div>` : `<p class="err">Choose at least one part of the day to rate Section 1.</p>`}
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">Section 2</span><h2>Behavioral and functional skills</h2></div>
+    ${scale("Give each skill one rating from 0 to 3. Open the guide under each skill to see what each number looks like.")}
+    <p class="hint">Leave on “—” if this area isn’t something you can speak to.</p>
+    <div class="scroll"><table class="grid"><thead><tr><th class="skill">Skill</th><th class="set">Rating</th></tr></thead><tbody>${s2rows}</tbody></table></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">Section 3</span><h2>Support by class</h2></div>
+    ${scale("Rate each class you teach or observe from 0 to 3.")}
+    <h3 style="margin-top:16px">Classes the student takes</h3>
+    ${chips(CLASS_OPTIONS, state.classes, "data-togcls")}
+    <div style="margin-top:12px">${guide(S3G, true)}</div>
+    ${clsIds.length ? `<div class="scroll"><table class="grid"><thead><tr><th>Class</th><th class="set">Rating</th></tr></thead><tbody>${s3rows}</tbody></table></div>` : ""}
+    ${evBox("s3")}
+    <div class="btnrow">
+      <button type="button" class="btn" id="buildReport">Build my report</button>
+      <button type="button" class="btn ghost" id="startOver">Start over</button>
+    </div>
+    <div class="err" id="formErr" role="alert"></div>
+  </section>`;
+}
+function refreshEvidence(){
+  app.querySelectorAll("[data-evwrap]").forEach(el=>el.classList.toggle("show", isHighKey(state, el.dataset.evwrap)));
+}
+
+/* ---------- report ---------- */
+function ribbon(items){
+  return `<div class="ribbon">${items.map(it=>{ const l=levelOf(it.p)||"none"; return `<div class="rib ${l}"><div class="n">${esc(it.name)}</div><div class="l">${it.p==null?"Not rated":LEVEL[l]}</div></div>`; }).join("")}</div>`;
+}
+function bars(items){
+  if(!items.length) return `<p class="method">None selected.</p>`;
+  return `<div class="bars">${items.map(it=>{ const l=levelOf(it.p); return `<div class="nm">${esc(it.name)}</div><div class="track">${l?`<i class="${l}" style="width:${Math.max(2,it.p*100)}%"></i>`:""}</div><div class="v">${it.p==null?'<span class="badge none">Not rated</span>':`<span class="badge ${l}">${LEVEL[l]}</span> ${pct(it.p)}`}</div>`; }).join("")}</div>`;
+}
+function callouts(all){
+  const grp = lv => all.filter(x=>levelOf(x.p)===lv).map(x=>x.name);
+  const none = all.filter(x=>x.p==null).map(x=>x.name);
+  const box = (lv,title,list) => `<div class="co ${lv}"><h4>${title}</h4><p>${list.length?esc(list.join(", ")):"None"}</p></div>`;
+  return `<div class="callouts">${box("high","Higher-need times",grp("high"))}${box("medium","Moderate-need times",grp("medium"))}${box("low","Lower-need times",grp("low"))}</div>${none.length?`<p class="method">Not rated: ${esc(none.join(", "))}</p>`:""}`;
+}
+const heatClass = v => v==null?"na":v<=0?"h0":v<=1?"h1":v<=2?"h2":"h3";
+function heat(st){
+  const setIds = ordered(st.settings, SETTING_OPTIONS);
+  if(!setIds.length) return `<p class="method">No parts of the day selected.</p>`;
+  return `<div class="scroll"><table class="heat"><thead><tr><th>Skill</th>${setIds.map(s=>`<th>${esc(LABEL[s])}</th>`).join("")}</tr></thead><tbody>${S1_IDS.map(sk=>`<tr><th scope="row" style="text-align:left">${esc(S1N[sk])}</th>${setIds.map(se=>{ const v=g1(st,sk,se); return `<td class="${heatClass(v)}">${fmt(v)}</td>`; }).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+function funcTable(st){
+  const rated = S2_IDS.filter(sk=>g2(st,sk)!=null);
+  if(!rated.length) return `<p class="method">No one rated this section.</p>`;
+  const rows = S2_IDS.map((sk,i)=>({n:S2N[sk],g:S2[i][1],v:g2(st,sk)})).filter(r=>r.v!=null && r.v>0);
+  if(!rows.length) return `<p>All rated areas were scored 0, no support needed.</p>`;
+  return `<table class="plain"><thead><tr><th>Skill</th><th>Rating</th><th>What that rating describes</th></tr></thead><tbody>${rows.map(r=>`<tr><td><b>${esc(r.n)}</b></td><td>${fmt(r.v)}</td><td>${esc(r.g[Math.round(r.v)])}</td></tr>`).join("")}</tbody></table>`;
+}
+const evText = evs => (evs && evs.length) ? evs.map(e=>EVLABEL[e]).join(", ") : "None marked";
+const weakBadge = w => w==="none" ? ` <span class="badge high">No data marked</span>` : w==="estimate" ? ` <span class="badge medium">Estimate only</span>` : "";
+
+function evidenceBlock(st, ctx){
+  const items = itemsHigh(st);
+  if(!items.length) return `<p>No items were rated 2 or 3.</p>`;
+  if(ctx.mode==="team"){
+    let weakCount = 0;
+    const rows = items.map(it=>{
+      const by = ctx.evBy[it.key] || [];
+      const allWeak = !by.length || by.every(b=>weakness(b.evs));
+      if(allWeak) weakCount++;
+      const lines = by.length ? by.map(b=>`${esc(b.rater)}: ${esc(evText(b.evs))}`).join("<br>") : "No individual rater scored this a 2 or 3";
+      return `<tr><td><b>${esc(it.label)}</b>${allWeak?` <span class="badge medium">Check data</span>`:""}</td><td>${esc(it.detail)}</td><td>${lines}</td></tr>`;
+    }).join("");
+    return `<p class="hint">For each item the team scored 2 or 3, what each rater who gave it a 2 or 3 based their rating on.</p><div class="scroll"><table class="plain"><thead><tr><th>Item</th><th>Combined ratings</th><th>Based on</th></tr></thead><tbody>${rows}</tbody></table></div>${weakCount?`<div class="warnbox">${weakCount} item${weakCount>1?"s are":" is"} rated 2 or 3 without any data beyond memory. Consider collecting data before finalizing.</div>`:""}`;
+  }
+  let weakCount = 0;
+  const rows = items.map(it=>{ const evs = st.ev[it.key]||[], w = weakness(evs); if(w) weakCount++;
+    return `<tr><td><b>${esc(it.label)}</b>${weakBadge(w)}</td><td>${esc(it.detail)}</td><td>${esc(evText(evs))}</td></tr>`; }).join("");
+  return `<div class="scroll"><table class="plain"><thead><tr><th>Item</th><th>Ratings of 2 or 3</th><th>Based on</th></tr></thead><tbody>${rows}</tbody></table></div>${weakCount?`<div class="warnbox">${weakCount} item${weakCount>1?"s were":" was"} rated 2 or 3 without data beyond memory. If you can, collect a week of tallies or log entries before the meeting.</div>`:""}`;
+}
+
+function reportHTML(st, ctx){
+  const A = analyze(st), team = ctx.mode==="team";
+  const lv = levelOf(A.p) || "none";
+  const meta = team
+    ? `<dt>Raters</dt><dd>${ctx.raters.length}</dd><dt>Combined by</dt><dd>${ctx.method==="median"?"Median":"Average"}</dd><dt>Generated</dt><dd>${esc(todayStr())}</dd>`
+    : `<dt>Role</dt><dd>${esc(st.role||"Not given")}</dd><dt>Generated</dt><dd>${esc(todayStr())}</dd>`;
+  let minutesStat = "";
+  if(team){
+    const m = ctx.minutes, pot = m.day + m.before + m.after - m.sped;
+    const mins = A.p==null?0:Math.round(A.p*pot);
+    minutesStat = `<div class="stat"><div class="lbl">Suggested starting point</div><div class="big">${mins} min/day</div><div class="lbl">${pct(A.p||0)} of ${pot} potential minutes (${m.day} day + ${m.before} before + ${m.after} after − ${m.sped} sped without para)</div></div>`;
+  }
+  let teamBlocks = "";
+  if(team){
+    teamBlocks = `<section class="r-sec"><h3>Each rater’s overall score</h3>
+      <div class="scroll"><table class="plain"><thead><tr><th>Rater</th><th>Role</th><th>Items rated</th><th>Percent of need</th><th></th></tr></thead><tbody>${ctx.raters.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.role||"—")}</td><td>${r.rated}</td><td>${r.p==null?"—":pct(r.p)}</td><td>${r.flag?`<span class="badge medium">${esc(r.flag)}</span>`:""}</td></tr>`).join("")}</tbody></table></div></section>
+      <section class="r-sec"><h3>Where raters disagreed</h3>
+      ${ctx.disagree.length?`<p class="hint">Ratings that differ by 2 or more points on the same item. Worth talking through first.</p><table class="plain"><thead><tr><th>Item</th><th>Ratings</th></tr></thead><tbody>${ctx.disagree.map(d=>`<tr><td><b>${esc(d.item)}</b></td><td>${esc(d.list)}</td></tr>`).join("")}</tbody></table>`:`<p>No item had ratings 2 or more points apart.</p>`}</section>`;
+  }
+  return `<div class="report">
+    <div class="r-head"><div><p class="r-kind">${team?"Team summary":"Rater report"}</p><h2>Paraprofessional Needs Report</h2></div><dl class="meta">${meta}</dl></div>
+    <div class="print-only writein"><span>Student: ______________________________</span><span>Date: ______________</span>${team?"":`<span>Completed by: ________________________</span>`}</div>
+
+    <div class="overall">
+      <div class="stat"><div class="lbl">Overall percent of need</div><div class="big">${A.p==null?"—":pct(A.p)}</div><div><span class="badge ${lv}">${A.p==null?"Nothing rated":LEVEL[lv]}</span></div><div class="lbl">${A.rated} of ${A.possible} items rated</div></div>
+      ${minutesStat}
+    </div>
+    ${team && ctx.checks && ctx.checks.length ? `<section class="r-sec"><h3>Things to check</h3><div class="warnbox"><ul class="checks">${ctx.checks.map(c=>`<li>${esc(c)}</li>`).join("")}</ul></div></section>` : ""}
+    <p class="method">Percent of need counts only items that were rated, so settings a rater didn’t observe don’t pull the score down. For comparison, the original matrix method (blanks as zero, out of ${A.possible*3}) gives ${pct(A.orig)}.</p>
+
+    <section class="r-sec"><h3>Need across the school day</h3>
+      ${A.settings.length ? ribbon(A.settings) : ""}
+      <p class="ribcap">Executive functioning (Section 1), in order of the school day</p>
+      ${bars(A.settings)}
+    </section>
+    <section class="r-sec"><h3>Need by class</h3>${bars(A.classes)}${callouts([...A.settings,...A.classes])}</section>
+    <section class="r-sec"><h3>Behavioral and functional skills</h3>${funcTable(st)}</section>
+    <section class="r-sec"><h3>Skill-by-setting detail</h3><p class="hint">Darker cells are higher ratings. Dashes were not observed.</p>${heat(st)}</section>
+    ${teamBlocks}
+    <section class="r-sec"><h3>What the higher ratings are based on</h3>${evidenceBlock(st, ctx)}</section>
+
+    <section class="r-sec print-only"><h3>Team discussion</h3>
+      <p><b>Areas the team agrees need support:</b></p><div class="lines"><div></div><div></div></div>
+      <p style="margin-top:12px"><b>When and where support will be provided:</b></p><div class="lines"><div></div><div></div></div>
+      <p style="margin-top:12px"><b>Paraprofessional minutes per day agreed on:</b> ________</p>
+    </section>
+    ${ctx.code?`<section class="r-sec print-only codeprint"><h3>Rater code</h3><p class="method">To add these ratings to a team summary, copy everything below, starting with PSM, and paste it into a Rater box on the Team summary tab.</p><div class="codetext">${esc(ctx.code)}</div></section>`:""}
+    <p class="fine">This matrix is a guide. The IEP team decides paraprofessional support by looking at the student’s schedule, data, and setting together.</p>
+  </div>`;
+}
+
+let currentCode = "", savedCode = "";
+function updateSaveNote(){
+  const n = document.getElementById("saveNote"); if(!n) return;
+  const ok = currentCode && currentCode===savedCode;
+  n.classList.toggle("ok", !!ok);
+  n.querySelector("p").textContent = ok
+    ? "Your code is saved. You can close this tab."
+    : "Before you close this tab, download the PDF or copy your rater code. Without it, your ratings can’t be added to the team summary.";
+}
+document.addEventListener("copy", ()=>{ if(document.activeElement && document.activeElement.id==="codeOut"){ savedCode = currentCode; updateSaveNote(); } });
+window.addEventListener("beforeunload", e=>{
+  if(currentCode && currentCode!==savedCode){ e.preventDefault(); e.returnValue = ""; return ""; }
+});
+function renderRaterReport(){
+  const code = encode(state);
+  currentCode = code;
+  app.innerHTML = `<div class="savenote no-print" id="saveNote"><p></p><button class="btn small" data-pdf="rater">Download PDF</button><button class="btn ghost small" id="jumpCode">Show my code</button></div>`
+  + reportHTML(state,{mode:"rater",code}) + `
+  <div class="no-print">
+    <div class="btnrow"><button class="btn" data-pdf="rater">Download PDF</button><button class="btn ghost" id="printBtn">Print report</button><button class="btn ghost" id="backBtn">Back to my ratings</button></div>
+    <p class="method" id="pdfMsg"></p>
+    <div class="sec codebox" id="codeBox"><h3>Your rater code</h3><p class="hint">Send this to the case manager so your ratings can be combined with the rest of the team’s. It holds only your role, your ratings, and the evidence boxes you checked. The code is also printed at the end of your PDF.</p>
+      <textarea readonly id="codeOut">${code}</textarea>
+      <div class="btnrow"><button class="btn ghost small" id="copyBtn">Copy code</button><span id="copyMsg" class="method"></span></div></div>
+  </div>`;
+  updateSaveNote();
+}
+
+/* ---------- team ---------- */
+function teamFormHTML(t, ro){
+  return `<section class="sec${ro?"":" no-print"}">
+    <h2>Combine the team’s ratings</h2>
+    <p class="hint">Paste one rater code per box. Each rater gets their code at the bottom of their report. Minutes are only calculated here, not on individual reports.</p>
+    <div>${t.codes.map((c,i)=>`<div class="teamcode"><label class="f" style="flex:1">Rater ${i+1}${t.labels?` <span class="sub">${esc(t.labels[i])}</span>`:""}<textarea data-code="${i}" placeholder="PSM3.…"${ro?" readonly":""}>${esc(c)}</textarea></label>${!ro&&t.codes.length>1?`<button class="btn ghost small" data-rm="${i}" aria-label="Remove rater ${i+1}" style="margin-top:22px">Remove</button>`:""}</div>`).join("")}</div>
+    ${ro?"":`<div class="btnrow"><button class="btn ghost small" id="addCode">Add a rater</button></div>`}
+    <h3 style="margin-top:20px">How to combine</h3>
+    <div class="radios">
+      <label><input type="radio" name="${ro?"exmethod":"method"}" value="median"${t.method==="median"?" checked":""}${ro?" disabled":""}> Median (recommended, one high or low rater can’t swing it)</label>
+      <label><input type="radio" name="${ro?"exmethod":"method"}" value="mean"${t.method==="mean"?" checked":""}${ro?" disabled":""}> Average</label>
+    </div>
+    <h3 style="margin-top:20px">Minutes in the day</h3>
+    <div class="fields">
+      <label class="f">Minutes in a typical school day<input type="number" min="0" data-min="day" value="${t.day}"${ro?" disabled":""}></label>
+      <label class="f">Plus supervision before start of day<input type="number" min="0" data-min="before" value="${t.before}"${ro?" disabled":""}></label>
+      <label class="f">Plus supervision before dismissal<input type="number" min="0" data-min="after" value="${t.after}"${ro?" disabled":""}></label>
+      <label class="f">Minus sped minutes without para<input type="number" min="0" data-min="sped" value="${t.sped}"${ro?" disabled":""}></label>
+    </div>
+    ${ro?"":`<div class="btnrow"><button class="btn" id="buildTeam">Build team summary</button></div><div class="err" id="teamErr" role="alert"></div>`}
+  </section>`;
+}
+function renderTeam(){ app.innerHTML = teamFormHTML(team,false) + `<div id="teamOut">${teamHTML}</div>`; }
+
+function computeTeamHTML(t){
+  const codes = t.codes.map(c=>c.trim()).filter(Boolean);
+  if(!codes.length) throw new Error("Paste at least one rater code to build the summary.");
+  const states = codes.map((c,i)=>{ try{ return decode(c); }catch(e){ throw new Error(`Rater ${i+1}: ${e.message}`); } });
+  const checks = [];
+  const agg = t.method==="median" ? median : mean;
+  const name = (s,i) => `Rater ${i+1}`;
+  const nameRole = (s,i) => `Rater ${i+1}${s.role?` (${s.role})`:""}`;
+  const setIds = ordered([...new Set(states.flatMap(s=>s.settings))], SETTING_OPTIONS);
+  const clsIds = ordered([...new Set(states.flatMap(s=>s.classes))], CLASS_OPTIONS);
+  const disagree = [];
+  const comb = (getter, label) => {
+    const vals = states.map((s,i)=>({r:nameRole(s,i),v:getter(s)})).filter(x=>x.v!=null);
+    if(!vals.length) return null;
+    const nums = vals.map(x=>x.v);
+    if(Math.max(...nums)-Math.min(...nums) >= 2) disagree.push({item:label, list: vals.map(x=>`${x.r}: ${x.v}`).join(", ")});
+    return agg(nums);
+  };
+  const st = {v:3, role:"", settings:setIds, classes:clsIds, s1:{}, s2:{}, s3:{}, ev:{}};
+  S1_IDS.forEach(sk=>setIds.forEach(se=>{ const v = comb(s=>s.settings.includes(se)?g1(s,sk,se):null, `${S1N[sk]}, ${LABEL[se]}`); if(v!=null) (st.s1[sk]=st.s1[sk]||{})[se]=v; }));
+  S2_IDS.forEach(sk=>{ const v = comb(s=>g2(s,sk), S2N[sk]); if(v!=null) st.s2[sk]=v; });
+  clsIds.forEach(c=>{ const v = comb(s=>s.classes.includes(c)?g3(s,c):null, LABEL[c]); if(v!=null) st.s3[c]=v; });
+  const evBy = {};
+  states.forEach((s,i)=>itemsHigh(s).forEach(it=>{ (evBy[it.key]=evBy[it.key]||[]).push({rater:nameRole(s,i), evs:s.ev[it.key]||[]}); }));
+  const raters = states.map((s,i)=>{ const A=analyze(s); return {name:name(s,i),role:s.role,rated:A.rated,p:A.p}; });
+  if(raters.length>1) raters.forEach((r,i)=>{
+    const others = raters.filter((_,j)=>j!==i && raters[j].p!=null).map(x=>x.p);
+    if(r.p!=null && others.length){ const d = r.p - mean(others); if(Math.abs(d)>=0.2) r.flag = `${Math.round(Math.abs(d)*100)} points ${d>0?"above":"below"} others`; }
+  });
+  states.forEach((s,i)=>{ if(s._dropped.length) checks.push(`${nameRole(s,i)}’s code includes items this version of the tool doesn’t use (${s._dropped.join(", ")}). Those ratings were left out.`); });
+  const sameCodes = codes.length !== new Set(codes.map(c=>c.replace(/\s+/g,""))).size;
+  if(sameCodes) checks.push("The same code was pasted more than once, so that rater is counted twice.");
+  return reportHTML(st,{mode:"team",checks,raters,method:t.method,disagree,evBy,minutes:{day:+t.day||0,before:+t.before||0,after:+t.after||0,sped:+t.sped||0}});
+}
+function buildTeam(){
+  const err = document.getElementById("teamErr"); err.textContent = "";
+  try{ teamHTML = computeTeamHTML(team) + `<div class="btnrow no-print"><button class="btn" data-pdf="team">Download PDF</button><button class="btn ghost" id="printBtn">Print team summary</button></div><p class="method no-print" id="pdfMsg"></p>`; }
+  catch(e){ err.textContent = e.message; return; }
+  const out = document.getElementById("teamOut"); out.innerHTML = teamHTML; out.scrollIntoView({behavior:"smooth"});
+  save();
+}
+
+/* ---------- PDF ---------- */
+let inFrame = true; try{ inFrame = window.self!==window.top; }catch(e){}
+const fileDate = () => new Date().toISOString().slice(0,10);
+function addCodePages(pdf, code, role){
+  const W = pdf.internal.pageSize.getWidth(), H = pdf.internal.pageSize.getHeight(), M = 0.6;
+  pdf.addPage(); pdf.setTextColor(0,0,0);
+  pdf.setFont("helvetica","bold"); pdf.setFontSize(15); pdf.text("Rater code", M, 0.85);
+  pdf.setFont("helvetica","normal"); pdf.setFontSize(10);
+  let y = 1.15;
+  pdf.text(`Role: ${role||"Not given"}`, M, y); y += 0.28;
+  const howto = pdf.splitTextToSize("To add these ratings to a team summary, select all of the code below (it starts with PSM3.), copy it, and paste it into a Rater box on the Team summary tab. Line breaks in the copied text are fine.", W-2*M);
+  pdf.text(howto, M, y); y += howto.length*0.17 + 0.15;
+  pdf.setFont("courier","normal"); pdf.setFontSize(8);
+  for(let i=0;i<code.length;i+=100){
+    if(y > H-0.7){ pdf.addPage(); y = 0.8; }
+    pdf.text(code.slice(i,i+100), M, y); y += 0.135;
+  }
+}
+async function downloadPDF(kind){
+  const msg = document.getElementById("pdfMsg");
+  const el = kind==="team" ? document.querySelector("#teamOut .report") : app.querySelector(".report");
+  if(!el) return;
+  if(inFrame || !window.html2pdf){
+    if(msg) msg.textContent = "In the print window, choose “Save as PDF” as the printer. The rater code prints on the last page.";
+    if(kind==="rater"){ savedCode = currentCode; updateSaveNote(); }
+    setTimeout(()=>window.print(), 50);
+    return;
+  }
+  const btns = [...document.querySelectorAll(`[data-pdf="${kind}"]`)];
+  btns.forEach(b=>{ b.disabled = true; b.dataset.label = b.textContent; b.textContent = "Making PDF…"; });
+  const root = document.documentElement, prevTheme = root.getAttribute("data-theme");
+  root.setAttribute("data-theme","light"); document.body.classList.add("pdfmode");
+  const filename = kind==="team" ? `Para needs team summary ${fileDate()}.pdf` : `Para needs rater report ${fileDate()}.pdf`;
+  const holder = document.createElement("div");
+  holder.style.width = "760px"; holder.style.background = "#ffffff";
+  holder.appendChild(el.cloneNode(true));
+  try{
+    const worker = window.html2pdf().set({
+      margin:[0.45,0.45,0.55,0.45], filename,
+      image:{type:"jpeg",quality:0.95},
+      html2canvas:{scale:2,backgroundColor:"#ffffff",useCORS:true,scrollX:0,scrollY:0},
+      jsPDF:{unit:"in",format:"letter",orientation:"portrait"},
+      pagebreak:{mode:["css","legacy"],avoid:[".r-sec",".stat","tr",".r-head"]}
+    }).from(holder).toPdf();
+    const pdf = await worker.get("pdf");
+    if(kind==="rater") addCodePages(pdf, currentCode, state.role);
+    pdf.save(filename);
+    if(kind==="rater"){ savedCode = currentCode; updateSaveNote(); }
+    if(msg) msg.textContent = kind==="rater" ? "PDF downloaded. Your rater code is on its last page." : "PDF downloaded.";
+  }catch(e){
+    if(msg) msg.textContent = "The PDF couldn’t be made in this browser. Use Print and choose “Save as PDF” instead.";
+  }finally{
+    if(prevTheme===null) root.removeAttribute("data-theme"); else root.setAttribute("data-theme",prevTheme);
+    document.body.classList.remove("pdfmode");
+    btns.forEach(b=>{ b.disabled = false; b.textContent = b.dataset.label; });
+  }
+}
+
+/* ---------- examples ---------- */
+const N = null;
+function exState(role, setIds, rows, s2arr, clsIds, s3arr, ev){
+  const st = blankState(); st.role = role; st.settings = setIds; st.classes = clsIds; st.ev = ev;
+  S1_IDS.forEach((sk,i)=>setIds.forEach((se,j)=>{ const v=rows[i][j]; if(v!=null) (st.s1[sk]=st.s1[sk]||{})[se]=v; }));
+  S2_IDS.forEach((sk,i)=>{ if(s2arr[i]!=null) st.s2[sk]=s2arr[i]; });
+  clsIds.forEach((c,k)=>{ if(s3arr[k]!=null) st.s3[c]=s3arr[k]; });
+  return st;
+}
+const EX_RATERS = [
+  exState("Paraprofessional", ["arrival","classroom","lunchrecess","transitions","departure"],
+    [[0,1,1,2,0],[0,1,2,2,0],[1,1,0,1,1],[0,1,1,0,0],[0,2,1,1,0],[0,2,1,1,0],[0,1,2,1,0],[0,2,0,0,0],[0,2,2,2,0],[1,2,3,2,1]],
+    [2,1,0,1,0,0,0],
+    DEFAULT_CLASS_IDS, [2,1,1,1,2,1,0,1,0],
+    {"s1:finds":["obs"],"s1:maintains":["log","tally"],"s1:attends":["obs"],"s1:responds":["obs","work"],"s1:participates":["obs"],"s1:completes":["work"],"s1:terminates":["tally"],"s1:rules":["tally"],"s2:interpersonal":["log"],"s3":["work","progress"]}),
+  exState("Classroom/general ed teacher", ["arrival","classroom","transitions"],
+    [[0,0,1],[0,1,2],[1,1,1],[0,1,0],[0,3,1],[0,2,1],[0,1,1],[0,3,0],[0,2,2],[1,3,2]],
+    [2,1,0,0,0,0,0],
+    ["reading","math","socialstudies","science","writing"], [3,2,1,1,3],
+    {"s1:maintains":["obs"],"s1:attends":["obs","tally"],"s1:responds":["work"],"s1:completes":["work"],"s1:terminates":["estimate"],"s1:rules":["tally"],"s2:interpersonal":["estimate"],"s3":["work","progress"]}),
+  exState("Specialist (PE, music, art, etc.)", ["classroom","transitions"],
+    [[0,0],[0,0],[0,0],[0,0],[1,1],[1,0],[0,0],[1,0],[0,1],[0,0]],
+    [1,0,N,N,N,0,N],
+    ["pe","music","art"], [0,1,1],
+    {})
+];
+const EX_TEAM = {codes:EX_RATERS.map(encode), labels:EX_RATERS.map(r=>r.role), method:"median", day:420, before:15, after:0, sped:60};
+
+function renderExampleRater(){
+  const saved = state; state = EX_RATERS[0]; renderForm(); const formHTML = app.innerHTML; state = saved;
+  app.innerHTML = `<div class="exnote"><h2>Example: a completed rating</h2>
+    <p>This is a sample filled out by a paraprofessional for a made-up second grader. It can’t be edited. Use it to see what a finished form looks like and what the report gives the team.</p>
+    <ul>
+      <li>Every rating is 0 to 3. Higher numbers mean more adult support; 0 means the student handles it on their own.</li>
+      <li>Each 2 or 3 has its evidence boxes checked, like tally counts, behavior logs, or work samples.</li>
+      <li>The report at the bottom shows which parts of the day need the most support, which is what the team uses to plan where a para is needed.</li>
+    </ul></div>
+    <fieldset disabled class="example">${formHTML}</fieldset>
+    <h2 class="ex-h">The report this form produces</h2>
+    ${reportHTML(EX_RATERS[0],{mode:"rater"})}`;
+}
+function renderExampleTeam(){
+  let html;
+  try{ html = computeTeamHTML(EX_TEAM); }catch(e){ html = `<p class="err">${esc(e.message)}</p>`; }
+  app.innerHTML = `<div class="exnote"><h2>Example: a team summary</h2>
+    <p>Three people rated the same made-up student: the paraprofessional (her form is on the Example: ratings tab), the classroom teacher, and the PE teacher. The case manager pasted their three codes below.</p>
+    <ul>
+      <li>The classroom teacher only included the parts of the day she sees, and the PE teacher only rated his classes, so nothing they didn’t see counts against the scores.</li>
+      <li>The summary uses the median, so one rater who scores much higher or lower can’t swing the result.</li>
+      <li>“Where raters disagreed” lists items to talk through first. Here the PE teacher sees far fewer problems than the others, which may say something about what works in his class.</li>
+      <li>The minutes at the top are a starting point for discussion, not a final number.</li>
+    </ul></div>
+    ${teamFormHTML(EX_TEAM,true)}
+    <h2 class="ex-h">The team summary this produces</h2>
+    ${html}`;
+}
+
+/* ---------- routing ---------- */
+const TABS = ["rater","team","exrater","exteam"];
+function render(){
+  TABS.forEach(id=>document.getElementById("tab-"+id).setAttribute("aria-selected", tab===id));
+  if(tab==="team") renderTeam();
+  else if(tab==="exrater") renderExampleRater();
+  else if(tab==="exteam") renderExampleTeam();
+  else if(view==="report") renderRaterReport();
+  else renderForm();
+}
+TABS.forEach(id=>{ document.getElementById("tab-"+id).onclick = ()=>{ tab=id; render(); if(id.startsWith("ex")) window.scrollTo(0,0); }; });
+
+app.addEventListener("change", e=>{
+  const t = e.target;
+  if(t.dataset.cell){
+    const [sec,a,b] = t.dataset.cell.split("|"); const v = t.value===""?null:+t.value;
+    if(sec==="s1"){ state.s1[a]=state.s1[a]||{}; if(v==null) delete state.s1[a][b]; else state.s1[a][b]=v; }
+    else if(sec==="s2"){ if(v==null) delete state.s2[a]; else state.s2[a]=v; }
+    else { if(v==null) delete state.s3[a]; else state.s3[a]=v; }
+    t.dataset.v = t.value; refreshEvidence(); save();
+  }
+  else if(t.dataset.togset){ const id=t.dataset.togset; state.settings = t.checked ? [...state.settings,id] : state.settings.filter(x=>x!==id); save(); renderForm(); }
+  else if(t.dataset.togcls){ const id=t.dataset.togcls; state.classes = t.checked ? [...state.classes,id] : state.classes.filter(x=>x!==id); save(); renderForm(); }
+  else if(t.dataset.ev){ const k=t.dataset.ev, cur=state.ev[k]||[]; state.ev[k] = t.checked ? [...new Set([...cur,t.value])] : cur.filter(x=>x!==t.value); save(); }
+  else if(t.dataset.role){ state.role=t.value; save(); }
+  else if(t.name==="method"){ team.method=t.value; save(); }
+});
+app.addEventListener("input", e=>{
+  const t = e.target;
+  if(t.dataset.code!==undefined){ team.codes[+t.dataset.code]=t.value; save(); }
+  else if(t.dataset.min){ team[t.dataset.min]=t.value; save(); }
+});
+app.addEventListener("click", e=>{
+  const t = e.target.closest("button"); if(!t) return;
+  if(t.dataset.fill!==undefined){ const se=t.dataset.fill; S1_IDS.forEach(sk=>{ state.s1[sk]=state.s1[sk]||{}; if(state.s1[sk][se]==null) state.s1[sk][se]=0; }); save(); renderForm(); }
+  else if(t.id==="buildReport"){
+    const A = analyze(state);
+    if(!A.rated){ document.getElementById("formErr").textContent = "Rate at least one item before building the report."; return; }
+    view="report"; render(); window.scrollTo(0,0);
+  }
+  else if(t.id==="startOver"){ if(confirm("Clear all ratings?")){ state=blankState(); save(); renderForm(); } }
+  else if(t.id==="backBtn"){ view="form"; render(); window.scrollTo(0,0); }
+  else if(t.dataset.pdf){ downloadPDF(t.dataset.pdf); }
+  else if(t.id==="jumpCode"){ document.getElementById("codeBox").scrollIntoView({behavior:"smooth"}); }
+  else if(t.id==="printBtn"){ if(view==="report" && tab==="rater"){ savedCode = currentCode; updateSaveNote(); } window.print(); }
+  else if(t.id==="copyBtn"){
+    const ta = document.getElementById("codeOut"), msg = document.getElementById("copyMsg");
+    ta.select();
+    const done = ()=>{ msg.textContent = "Copied."; savedCode = currentCode; updateSaveNote(); };
+    const fallback = ()=>{ try{ document.execCommand("copy") ? done() : (msg.textContent = "Select the code and copy it manually, then send it to your case manager."); }catch(_){ msg.textContent = "Select the code and copy it manually, then send it to your case manager."; } };
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(ta.value).then(done, fallback); } else fallback();
+  }
+  else if(t.id==="addCode"){ team.codes.push(""); save(); renderTeam(); }
+  else if(t.dataset.rm!==undefined){ team.codes.splice(+t.dataset.rm,1); save(); renderTeam(); }
+  else if(t.id==="buildTeam"){ buildTeam(); }
+});
+render();
+</script>
+</body>
+</html>
